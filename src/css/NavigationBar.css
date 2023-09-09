@@ -1,0 +1,33 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+    color: lightgray; /* Light gray text */
+    padding: 1rem;
+    position: relative; /* if needed */
+  }
+  
+  .logo {
+    margin-left: 5%;
+    color: inherit; /* Inherit color from parent */
+  }
+  
+  .menu {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+  }
+  
+  .menu li a {
+    color: inherit; /* Inherit color from parent */
+    text-decoration: none;
+  }
+  
+  .login-icon {
+    margin-right: 5%;
+    color: inherit; /* Inherit color from parent */
+  }
+  
