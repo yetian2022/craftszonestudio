@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import "../css/Brookline.css" // Import the CSS
+import ImageSlideshow from "../components/ImageSlideshow"
 
 const Brookline = () => {
   return (
@@ -15,6 +16,7 @@ const Brookline = () => {
           <button className="book-now-button">Book Now</button>
         </Link>
       </div>
+      <ImageSlideshow />
     </div>
   )
 }

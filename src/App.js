@@ -19,6 +19,12 @@ function App() {
     <Router>
       <NavigationBar />
       <Routes>
+        <Route
+          path="/admin"
+          render={() =>
+            user.role === "admin" ? <AdminPanel /> : <Redirect to="/login" />
+          }
+        />
         <Route path="/brookline" element={<Brookline />} />
         <Route path="/cambridge" element={<Cambridge />} />
         <Route path="/booking/menu" element={<Placeholder />} />
