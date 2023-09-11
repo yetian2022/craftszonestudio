@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const multer = require("multer")
 const { connect, Schema, model } = require("mongoose")
+const loginRoutes = require("./routes/loginRoutes")
 
 // debug only
 const authenticateJWT = require("./modules/authenticateJWT")
@@ -18,10 +19,12 @@ const authRoutes = require("./routes/authRoutes")
 const imageRoutes = require("./routes/imageRoutes")
 
 const app = express()
+app.use(express.json())
 app.use(cors())
 
 app.use("/api", authRoutes) // '/api' is the base path for all auth routes
 app.use("/api", imageRoutes) // '/api' is the base path for all image routes
+app.use("/api", loginRoutes) // '/api' is the base path for all login routes
 
 // MongoDB setup
 mongoose
