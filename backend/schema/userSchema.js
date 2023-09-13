@@ -1,5 +1,11 @@
 const userSchema = new mongoose.Schema({
+  googleId: String,
   username: String,
-  password: String,
-  role: String, // 'admin' or 'user'
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
 })
+
+const User = mongoose.model("User", userSchema)
