@@ -5,6 +5,8 @@ const cors = require("cors")
 const passport = require("passport")
 const GoogleStrategy = require("passport-google-oauth20").Strategy
 const googleAuthRoutes = require("./routes/googleAuthRoutes") // Google OAuth routes
+const Image = require("./model/imageModel")
+const imageRoutes = require("./routes/imageRoutes") // Image routes
 
 const { connect, Schema, model } = require("mongoose")
 
@@ -50,6 +52,7 @@ app.use(passport.session())
 
 // Routes
 app.use(googleAuthRoutes) // Google OAuth routes
+app.use("/api", imageRoutes) // Image routes (If you're still using this")
 
 // MongoDB setup
 mongoose
@@ -63,12 +66,6 @@ mongoose
   .catch((err) => {
     console.error("Could not connect to MongoDB", err)
   })
-
-// Image Schema and Model (If you're still using this)
-const imageSchema = new Schema({
-  url: String,
-})
-const Image = model("Image", imageSchema)
 
 // API endpoint to get images (If you're still using this)
 app.get("/api/images", async (req, res) => {
