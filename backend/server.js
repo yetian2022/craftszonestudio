@@ -7,16 +7,15 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy
 const googleAuthRoutes = require("./routes/googleAuthRoutes") // Google OAuth routes
 const Image = require("./model/imageModel")
 const imageRoutes = require("./routes/imageRoutes") // Image routes
-
 const { connect, Schema, model } = require("mongoose")
+const cookieParser = require("cookie-parser")
 
 // Passport Configuration for Google OAuth
 passport.use(
   new GoogleStrategy(
     {
-      clientID:
-        "203299230858-2o3q26f3kkou6i9i5kbh6js6dlpa9456.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "http://localhost:3001/auth/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
@@ -37,7 +36,12 @@ passport.deserializeUser((obj, done) => {
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+)
 
 app.use(
   require("express-session")({
@@ -49,6 +53,7 @@ app.use(
 
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(cookieParser())
 
 // Routes
 app.use(googleAuthRoutes) // Google OAuth routes

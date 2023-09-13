@@ -17,7 +17,12 @@ router.get(
     failureRedirect: "/login", // Redirect to login page if authentication fails
   }),
   (req, res) => {
-    // Successful authentication, redirect home.
+    // Successful authentication, set HttpOnly cookie and redirect home.
+    res.cookie("googleAuthToken", req.user.token, {
+      httpOnly: true,
+      secure: false, // Set secure to false if not using HTTPS
+      // process.env.NODE_ENV === "production", // Set secure to true if in production
+    })
     res.redirect("/")
   }
 )
